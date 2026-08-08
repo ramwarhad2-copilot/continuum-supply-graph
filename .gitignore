@@ -3,6 +3,7 @@
 
 # Next.js output
 /.next
+/.open-next
 /out
 
 # test and tooling output
@@ -14,6 +15,7 @@ next-env.d.ts
 .env
 .env.local
 .env.*.local
+.dev.vars
 
 # deployment providers
 .vercel
