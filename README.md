@@ -2,7 +2,7 @@
 
 **Medicine supply resilience, understood as a graph.**
 
-Continuum helps healthcare operations teams answer a difficult question quickly: _if this supplier or distribution hub fails today, which clinics and medicines are at riskâ€”and what can we do next?_
+Continuum helps healthcare operations teams answer a difficult question quickly: _if this supplier or distribution hub fails today, which clinics and medicines are at risk—and what can we do next?_
 
 ![Continuum disruption dashboard](./docs/screenshots/continuum-dashboard.png)
 
@@ -92,15 +92,15 @@ See [the architecture notes](./docs/architecture.md) for request flow, decisions
 
 ```text
 src/
-â”œâ”€â”€ app/                         # Next.js pages and HTTP route handlers
-â”œâ”€â”€ application/                # Framework-free use-case orchestration
-â”œâ”€â”€ components/                 # Accessible presentation components
-â”œâ”€â”€ domain/                     # Entities, repository port, risk policy
-â”œâ”€â”€ infrastructure/
-â”‚   â”œâ”€â”€ config/                 # Validated environment configuration
-â”‚   â”œâ”€â”€ demo/                   # Seed fixture + local graph traversal
-â”‚   â””â”€â”€ graph/                  # Driver lifecycle, Cypher, CognoDB adapter
-â””â”€â”€ lib/                         # Public errors and browser API client
+├── app/                         # Next.js pages and HTTP route handlers
+├── application/                # Framework-free use-case orchestration
+├── components/                 # Accessible presentation components
+├── domain/                     # Entities, repository port, risk policy
+├── infrastructure/
+│   ├── config/                 # Validated environment configuration
+│   ├── demo/                   # Seed fixture + local graph traversal
+│   └── graph/                  # Driver lifecycle, Cypher, CognoDB adapter
+└── lib/                         # Public errors and browser API client
 scripts/seed.ts                  # Transactional, parameterized seed loader
 docs/                           # Architecture, screenshots, demo script
 ```
@@ -209,4 +209,3 @@ A focused 90-second walkthrough is outlined in [`docs/DEMO_SCRIPT.md`](./docs/DE
 ---
 
 Built as the Wexa AI CognoDB take-home assignment. Every architectural decision and query is intended to be explainable in a line-by-line review.
-
