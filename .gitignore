@@ -20,6 +20,7 @@ next-env.d.ts
 
 # deployment providers
 .vercel
+/.wrangler
 
 # OS and editor files
 .DS_Store
