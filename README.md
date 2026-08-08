@@ -129,7 +129,7 @@ DATA_SOURCE=cognodb
 COGNODB_URI=bolt+s://your-instance-id.databases.cognodb.cloud
 COGNODB_USERNAME=cognodb
 COGNODB_PASSWORD=your-password
-COGNODB_DATABASE=neo4j
+COGNODB_DATABASE=continuum-supply-graph
 ```
 
 5. Load the graph and start the application:
@@ -141,7 +141,7 @@ npm run dev
 
 The seed runs in a managed transaction. It deletes only nodes labeled `:Continuum`, recreates the realistic fixture, and never interpolates fixture values into query text.
 
-> If your managed instance provides a database name other than `neo4j`, use that value for `COGNODB_DATABASE`.
+> This project uses `continuum-supply-graph`. If you provision an instance with a different database name, use that value for `COGNODB_DATABASE`.
 
 ## Main graph queries
 

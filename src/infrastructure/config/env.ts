@@ -26,7 +26,7 @@ export function getConfig(
           uri: env.COGNODB_URI,
           username: env.COGNODB_USERNAME ?? "cognodb",
           password: env.COGNODB_PASSWORD,
-          database: env.COGNODB_DATABASE ?? "neo4j",
+          database: env.COGNODB_DATABASE ?? "continuum-supply-graph",
         }
       : { dataSource };
 
