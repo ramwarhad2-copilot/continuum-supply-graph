@@ -34,7 +34,7 @@ export class Neo4jSupplyNetworkRepository implements SupplyNetworkRepository {
     private readonly config: CognoConfig,
   ) {}
 
-  async getOverview(): Promise<NetworkOverview> {
+  async getOverview(closeDriver = true): Promise<NetworkOverview> {
     try {
       const session = this.driver.session({
         database: this.config.database,
@@ -71,12 +71,14 @@ export class Neo4jSupplyNetworkRepository implements SupplyNetworkRepository {
       }
     } catch (error) {
       throw new DatabaseUnavailableError({ cause: error });
+    } finally {
+      if (closeDriver) await this.driver.close();
     }
   }
 
   async analyzeDisruption(facilityId: string): Promise<ImpactAnalysis | null> {
     try {
-      const overview = await this.getOverview();
+      const overview = await this.getOverview(false);
       const disruptedFacility = overview.facilities.find((facility) => facility.id === facilityId);
       if (!disruptedFacility || disruptedFacility.kind === "clinic") return null;
 
@@ -123,6 +125,8 @@ export class Neo4jSupplyNetworkRepository implements SupplyNetworkRepository {
     } catch (error) {
       if (error instanceof DatabaseUnavailableError) throw error;
       throw new DatabaseUnavailableError({ cause: error });
+    } finally {
+      await this.driver.close();
     }
   }
 
@@ -138,6 +142,8 @@ export class Neo4jSupplyNetworkRepository implements SupplyNetworkRepository {
     } catch (error) {
       logDatabaseFailure("verifyConnectivity", error);
       throw new DatabaseUnavailableError({ cause: error });
+    } finally {
+      await this.driver.close();
     }
   }
 }
