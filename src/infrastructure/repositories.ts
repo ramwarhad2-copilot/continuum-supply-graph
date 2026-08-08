@@ -4,15 +4,11 @@ import { DemoSupplyNetworkRepository } from "@/infrastructure/demo/demo-supply-n
 import { getDriver } from "@/infrastructure/graph/driver";
 import { Neo4jSupplyNetworkRepository } from "@/infrastructure/graph/neo4j-supply-network-repository";
 
-let repository: SupplyNetworkRepository | undefined;
+const demoRepository = new DemoSupplyNetworkRepository();
 
 export function getSupplyNetworkRepository(): SupplyNetworkRepository {
-  if (repository) return repository;
-
   const config = getConfig();
-  repository =
-    config.dataSource === "cognodb"
-      ? new Neo4jSupplyNetworkRepository(getDriver(config), config)
-      : new DemoSupplyNetworkRepository();
-  return repository;
+  return config.dataSource === "cognodb"
+    ? new Neo4jSupplyNetworkRepository(getDriver(config), config)
+    : demoRepository;
 }
