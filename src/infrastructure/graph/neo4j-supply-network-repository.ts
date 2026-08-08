@@ -136,9 +136,24 @@ export class Neo4jSupplyNetworkRepository implements SupplyNetworkRepository {
         latencyMs: Math.max(1, Math.round(performance.now() - startedAt)),
       };
     } catch (error) {
+      logDatabaseFailure("verifyConnectivity", error);
       throw new DatabaseUnavailableError({ cause: error });
     }
   }
+}
+
+function logDatabaseFailure(operation: string, error: unknown): void {
+  const code =
+    typeof error === "object" && error !== null && "code" in error
+      ? String(error.code)
+      : undefined;
+
+  console.error("database_operation_failed", {
+    operation,
+    code,
+    name: error instanceof Error ? error.name : typeof error,
+    message: error instanceof Error ? error.message : "Non-error database failure",
+  });
 }
 
 function shortestPaths(records: Neo4jRecord[]): Map<string, PathRecord> {
