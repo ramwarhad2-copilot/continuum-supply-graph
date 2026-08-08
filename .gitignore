@@ -4,6 +4,7 @@
 # Next.js output
 /.next
 /.open-next
+/dist
 /out
 
 # test and tooling output
